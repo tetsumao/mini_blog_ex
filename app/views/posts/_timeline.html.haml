@@ -1,0 +1,41 @@
+= javascript_include_tag 'timeline'
+
+-# いいねユーザダイアログ
+.modal.fade#likedUserDialog{tabindex: -1, role: 'dialog', 'aria-labelledby': 'postDialogLabel', 'aria-hidden': 'true'}
+  .modal-dialog{role: 'document'}
+    .modal-content
+      .modal-header
+        %h5.modal-title#likedUserDialogLabel
+          いいね しているユーザー
+        %button.close{type: 'button', 'data-dismiss': 'modal', 'aria-label': 'Close'}
+          %span{'aria-hidden': 'true'}
+            &times;
+      .modal-body
+        #likedUserDialogBody
+      .modal-footer
+        %button.btn.btn-secondary{type: 'button', 'data-dismiss': 'modal'}
+          閉じる
+-# いいねユーザ一覧取得フォーム
+= form_with id: 'likedUsersForm', url: posts_liked_users_path, remote: true do |f|
+  = f.hidden_field :id, id: ''
+  = f.submit '', style: 'display: none'
+
+-# 自動スクロール
+.scroll-list.jscroll
+  - @posts.each do |post|
+    .alert.alert-primary.border-primary
+      %span
+        - if post.user.present?
+          -# ユーザ名
+          %strong
+            = link_to post.user.user_name, user_path(post.user_id)
+          -# フォローボタン
+          %span{class: "follow_button_#{post.user_id}", style: "display:inline-flex"}
+            = render 'user_relations/follow_button', user: post.user
+        = post.created_at.strftime('%Y/%m/%d %H:%M')
+      %pre.lead{style: 'background-color: transparent;'}
+        = post.content
+      -# いいねボタン
+      %span{class: "like_button_#{post.id}", style: "display:inline-flex"}
+        = render 'likes/like_button', post: post
+  = paginate @posts

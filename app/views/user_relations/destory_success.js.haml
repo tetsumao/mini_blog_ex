@@ -1,0 +1,7 @@
+-# フォローボタン部分テンプレートを置き換える
+$('.follow_button_#{@user_follow.id}').html("#{j render 'user_relations/follow_button', user: @user_follow}");
+-# トーストでフォロー解除成功通知
+toastr.info("#{@user_follow.user_name}のフォローを解除しました。");
+-# URLがあれば遷移
+- if @transition_url.present?
+  window.location.href = "#{@transition_url}";

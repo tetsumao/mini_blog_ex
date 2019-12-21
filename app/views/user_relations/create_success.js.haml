@@ -1,0 +1,4 @@
+-# フォローボタン部分テンプレートを置き換える
+$('.follow_button_#{@user_relation.follow_id}').html("#{j render 'user_relations/follow_button', user: @user_relation.follow}");
+-# トーストでフォロー成功通知
+toastr.success("#{@user_relation.follow.user_name}をフォローしました。");

@@ -1,0 +1,8 @@
+- post.liked_users.each do |user|
+  %div
+    -# ユーザ名
+    %strong
+      = link_to user.user_name, user_path(user.id)
+    -# フォローボタン
+    %span{class: "follow_button_#{user.id}", style: "display:inline-flex"}
+      = render 'user_relations/follow_button', user: user

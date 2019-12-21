@@ -1,0 +1,20 @@
+%h3
+  = "#{@user.user_name} さんのプロフィール"
+%p
+  = User.human_attribute_name :user_name
+  ：
+  = @user.user_name
+-# フォローボタン
+%span{class: "follow_button_#{@user.id}", style: "display:inline-flex"}
+  = render 'user_relations/follow_button', user: @user
+%p
+  = User.human_attribute_name :profile
+  ：
+  = @user.profile
+%p
+  = User.human_attribute_name :blog_url
+  ：
+  = @user.blog_url
+-# ログインユーザなら編集可
+- if @user.id == current_user.id
+  = link_to "編集", edit_user_registration_path, {class: 'btn btn-primary'}

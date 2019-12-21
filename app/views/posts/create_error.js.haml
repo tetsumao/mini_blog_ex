@@ -1,0 +1,8 @@
+-# エラーメッセージのクリア
+$('#error_explanation ul').empty();
+-# エラーメッセージを追加
+$('#error_explanation h2').text('入力に #{pluralize(@post.errors.count, "件")} エラーがあります');
+- @post.errors.full_messages.each do |post|
+  $('#error_explanation ul').append('<li>#{post}</li>');
+-# エラーメッセージを表示
+$('#error_explanation').show();

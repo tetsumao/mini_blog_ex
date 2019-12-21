@@ -1,0 +1,4 @@
+-# いいねボタン部分テンプレートを置き換える
+$('.like_button_#{@like.post_id}').html("#{j render 'likes/like_button', post: @post}");
+-# トーストでいいね成功通知
+toastr.success("いいね しました。");

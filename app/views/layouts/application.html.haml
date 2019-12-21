@@ -1,0 +1,73 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}/
+    %title mini-blog-ex
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    -# devise メッセージ
+    - if notice
+      %p.notice
+        = notice
+    - if alert
+      %p.alert
+        = alert
+    -# ナビゲーション
+    .fixed-top
+      %nav.navbar.navbar-expand-md.bg-dark.navbar-dark
+        .container
+          = link_to 'mini-blog-ex', root_path, class: 'navbar-brand'
+          %button.navbar-toggler{type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbarNavDropdown', 'aria-controls': 'navbarNavDropdown', 'aria-expanded': false, 'aria-label': 'Toggle navigation'}
+            %span.navbar-toggler-icon
+          .collapse.navbar-collapse#navbarNavDropdown
+            - if user_signed_in?
+              %ul.navbar-nav.mr-auto
+                -# 全体タイムライン
+                %li.nav-item
+                  %a.nav-link{href: root_path}
+                    全体
+                -# フォローしたユーザのみのタイムライン
+                %li.nav-item
+                  %a.nav-link{href: posts_followings_path}
+                    フォローしたユーザー
+              %ul.navbar-nav
+                -# 投稿ボタン
+                %button.btn.btn-primary{ type: 'button', 'data-toggle': 'modal', 'data-target': '#postDialog' }
+                  %i.far.fa-window-maximize
+                  投稿
+                -# プロフィール
+                %li.nav-item
+                  %a.nav-link{href: user_path(current_user.id)}
+                    #{current_user.user_name} さん
+                -# ログアウト
+                %li.nav-item
+                  %a.nav-link{href: destroy_user_session_path, 'data-method': :delete}
+                    ログアウト
+    .container
+      = yield
+    - if user_signed_in?
+      -# 投稿ダイアログ
+      .modal.fade#postDialog{tabindex: -1, role: 'dialog', 'aria-labelledby': 'postDialogLabel', 'aria-hidden': 'true'}
+        .modal-dialog{role: 'document'}
+          .modal-content
+            = form_with model: Post.new do |f|
+              .modal-header
+                %h5.modal-title#postDialogLabel
+                  投稿フォーム
+                %button.close{type: 'button', 'data-dismiss': 'modal', 'aria-label': 'Close'}
+                  %span{'aria-hidden': 'true'}
+                    &times;
+              .modal-body
+                #error_explanation{style: 'display: none'}
+                  %h2
+                  %ul
+                .field
+                  = f.text_area :content, size: "50x3", class: 'form-control'
+              .modal-footer
+                = f.submit '投稿する', class: 'btn btn-primary'
+                %button.btn.btn-secondary{type: 'button', 'data-dismiss': 'modal'}
+                  閉じる
