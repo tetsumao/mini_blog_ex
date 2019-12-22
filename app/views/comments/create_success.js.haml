@@ -1,0 +1,5 @@
+-# コメント部分テンプレートを置き換える
+$('.comment_button_#{@comment.post_id}').html("#{j render 'comments/comment_button', {post: @comment.post, open: true}}");
+$('.comment_line_#{@comment.post_id}').html("#{j render 'comments/comment_line', {post: @comment.post, open: true}}");
+-# トーストでコメント成功通知
+toastr.info("コメント しました。");

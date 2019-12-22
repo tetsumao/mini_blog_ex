@@ -1,0 +1,10 @@
+-# コメントボタン
+= form_with url: comments_switch_path, remote: true do |f|
+  = f.hidden_field :post_id, value: post.id, id: ''
+  = f.hidden_field :open, value: !open, id: ''
+  %button.btn.btn-outline-info.btn-sm{ type: 'submit', class: ('active' if open) }
+    = open ? '▲コメント' : '▼コメント'
+    -# コメント件数
+    - if post.comments.count > 0
+      %span.badge.badge-outline-info
+        = post.comments.count

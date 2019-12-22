@@ -4,6 +4,8 @@ class Post < ApplicationRecord
 
   # ユーザと連携
   belongs_to :user
+  # コメントとの連携
+  has_many :comments
 
   # いいねテーブルとの連携
   has_many :likes

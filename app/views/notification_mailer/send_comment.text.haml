@@ -1,0 +1,7 @@
+= "#{@comment.post.user.user_name} 様"
+
+= "あなたの投稿(#{@comment.post.created_at.strftime('%Y/%m/%d %H:%M')})にコメントが登録されました。"
+\------------------------------------------------------------
+= "#{@comment.user.user_name} #{@comment.created_at.strftime('%Y/%m/%d %H:%M')}"
+= @comment.content
+\------------------------------------------------------------

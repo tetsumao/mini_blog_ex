@@ -1,0 +1,23 @@
+
+-# 開いている時のみ
+- if open
+  -# コメントライン
+  - post.comments.each do |comment|
+    .alert.alert-info.border-info
+      %span
+        - if comment.user.present?
+          -# ユーザ名
+          %strong
+            = link_to comment.user.user_name, user_path(comment.user_id)
+          -# フォローボタン
+          %span{class: "follow_button_#{comment.user_id}", style: "display:inline-flex"}
+            = render 'user_relations/follow_button', user: comment.user
+        = comment.created_at.strftime('%Y/%m/%d %H:%M')
+      %pre.lead{style: 'background-color: transparent;'}
+        = comment.content
+  -# コメント入力
+  = form_with model: Comment.new, remote: true do |f|
+    .field
+      = f.hidden_field :post_id, value: post.id, id: ''
+      = f.text_area :content, size: "50x2", class: 'form-control', id: ''
+      = f.submit 'コメントする', class: 'btn btn-info'

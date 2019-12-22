@@ -38,4 +38,10 @@
       -# いいねボタン
       %span{class: "like_button_#{post.id}", style: "display:inline-flex"}
         = render 'likes/like_button', post: post
+      -# コメントボタン
+      %span{class: "comment_button_#{post.id}", style: "display:inline-flex"}
+        = render 'comments/comment_button', {post: post, open: false}
+      -# コメントライン
+      %div{class: "comment_line_#{post.id}"}
+        = render 'comments/comment_line', {post: post, open: false}
   = paginate @posts

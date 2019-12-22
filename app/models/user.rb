@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   # 投稿との連携
   has_many :posts, dependent: :destroy
+  # コメントとの連携
+  has_many :comments
 
   # ユーザ関連テーブルとの連携
   has_many :user_relations

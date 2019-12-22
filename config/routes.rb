@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   root 'posts#index'
   get 'posts/followings'
   post 'posts/liked_users'
+  post 'comments/switch'
   resources :posts, only: [:create]
+  resources :comments, only: [:create]
   resources :users, only: [:show]
   resources :user_relations, only: [:create, :destroy]
   resources :likes, only: [:create, :destroy]
