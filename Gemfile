@@ -44,10 +44,10 @@ gem 'toastr-rails'
 
 # Heroku環境
 gem 'rails_12factor'
-gem 'cloudinary'
+gem 'cloudinary' , '1.11.1'
 
 # 画像登録
-gem 'carrierwave'
+gem 'carrierwave', '~> 1.3.1'
 gem 'mini_magick'
 
 group :development, :test do
