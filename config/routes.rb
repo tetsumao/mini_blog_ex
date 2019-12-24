@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'posts/followings'
   post 'posts/liked_users'
   post 'comments/switch'
-  resources :posts, only: [:create]
+  resources :posts, only: [:show, :create]
   resources :comments, only: [:create]
   resources :users, only: [:show]
   resources :user_relations, only: [:create, :destroy]

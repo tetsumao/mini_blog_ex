@@ -1,0 +1,29 @@
+.alert.alert-primary.border-primary
+  %span
+    - if @post.user.present?
+      -# ユーザ名
+      %strong
+        = link_to @post.user.user_name, user_path(@post.user_id)
+      -# フォローボタン
+      %span{class: "follow_button_#{@post.user_id}", style: "display:inline-flex"}
+        = render 'user_relations/follow_button', user: @post.user
+    = @post.created_at.strftime('%Y/%m/%d %H:%M')
+  -# 本文
+  %pre.h1{style: 'background-color: transparent;'}
+    = @post.content
+  -# 画像
+  - if @post.picture.present?
+    %div
+      = image_tag @post.picture.url
+  -# いいねボタン
+  %span{class: "like_button_#{@post.id}", style: "display:inline-flex"}
+    = render 'likes/like_button', post: @post
+  -# コメントカウント
+  %span{class: "comment_count_#{@post.id}", style: "display:inline-flex"}
+    = render 'comments/comment_count', {post: @post}
+  -# コメントライン
+  %div{class: "comment_line_#{@post.id}"}
+    = render 'comments/comment_line', {post: @post, open: true}
+
+-# いいねダイアログ
+= render 'likes/like_dialog'

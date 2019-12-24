@@ -1,3 +1,4 @@
 -# コメント部分テンプレートを置き換える
 $('.comment_button_#{@post.id}').html("#{j render 'comments/comment_button', {post: @post, open: @open}}");
+$('.comment_count_#{@post_id}').html("#{j render 'comments/comment_count', {post: @post}}");
 $('.comment_line_#{@post.id}').html("#{j render 'comments/comment_line', {post: @post, open: @open}}");

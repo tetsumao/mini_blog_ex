@@ -1,0 +1,21 @@
+= javascript_include_tag 'like_dialog'
+
+-# いいねユーザダイアログ
+.modal.fade#likedUserDialog{tabindex: -1, role: 'dialog', 'aria-labelledby': 'postDialogLabel', 'aria-hidden': 'true'}
+  .modal-dialog{role: 'document'}
+    .modal-content
+      .modal-header
+        %h5.modal-title#likedUserDialogLabel
+          いいね しているユーザー
+        %button.close{type: 'button', 'data-dismiss': 'modal', 'aria-label': 'Close'}
+          %span{'aria-hidden': 'true'}
+            &times;
+      .modal-body
+        #likedUserDialogBody
+      .modal-footer
+        %button.btn.btn-secondary{type: 'button', 'data-dismiss': 'modal'}
+          閉じる
+-# いいねユーザ一覧取得フォーム
+= form_with id: 'likedUsersForm', url: posts_liked_users_path, remote: true do |f|
+  = f.hidden_field :id, id: ''
+  = f.submit '', style: 'display: none'

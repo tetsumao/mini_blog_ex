@@ -2,8 +2,6 @@
 $('#postDialog').modal('hide');
 -# エラーメッセージの非表示
 $('#error_explanation').hide();
--# 投稿内容クリア
-$('#post_content').val('');
 -# URLがあれば遷移
 - if @transition_url.present?
   window.location.href = "#{@transition_url}";

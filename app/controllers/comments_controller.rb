@@ -12,8 +12,8 @@ class CommentsController < ApplicationController
     # Ajax呼び出しのみ有効
     respond_to do |format|
       if @comment.save
-        # メール送信
-        NotificationMailer.send_comment(@comment).deliver
+        # 後でメール送信
+        NotificationMailer.send_comment(@comment).deliver_later
         format.js { render :create_success }
       else
         format.js { render :create_error }

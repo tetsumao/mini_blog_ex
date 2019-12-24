@@ -14,6 +14,11 @@ class PostsController < ApplicationController
     @posts = current_user.followings_posts.page(params[:page]).per(10).order(created_at: "DESC")
   end
 
+  # 投稿表示
+  def show
+    @post = Post.find(params[:id])
+  end
+
   # 投稿
   def create
     # 投稿生成
@@ -50,6 +55,6 @@ class PostsController < ApplicationController
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :picture)
   end
 end

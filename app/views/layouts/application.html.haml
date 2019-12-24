@@ -67,6 +67,8 @@
                   %ul
                 .field
                   = f.text_area :content, size: "50x3", class: 'form-control'
+                .field
+                  = f.file_field :picture, class: 'image'
               .modal-footer
                 = f.submit '投稿する', class: 'btn btn-primary'
                 %button.btn.btn-secondary{type: 'button', 'data-dismiss': 'modal'}
