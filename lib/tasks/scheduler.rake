@@ -5,11 +5,13 @@ namespace :scheduler do
     date = Date.yesterday
     # いいね数ランキングトップ10の投稿の {key: 投稿、val: [順位, カウンタ]} のハッシュ
     h_ranking = Post.ranking_hash(date)
-    # メールアドレスのある全ユーザ
-    users = User.where.not(email: [nil, ''])
-    # ユーザ別々に送信
-    users.each do |user|
-      NotificationMailer.send_ranking(date, h_ranking, user).deliver
+    if h_ranking.size > 0
+      # メールアドレスのある全ユーザ
+      users = User.where.not(email: [nil, ''])
+      # ユーザ別々に送信
+      users.each do |user|
+        NotificationMailer.send_ranking(date, h_ranking, user).deliver
+      end
     end
   end
 end
