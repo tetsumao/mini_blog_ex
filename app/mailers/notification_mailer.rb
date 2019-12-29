@@ -6,4 +6,14 @@ class NotificationMailer < ApplicationMailer
       format.text
     end
   end
+
+  # ランキング
+  def send_ranking(date, h_ranking, user)
+    @date = date
+    @h_ranking = h_ranking
+    @user = user
+    mail subject: @date.strftime("%Y/%m/%d") + " の「いいね」数ランキング", to: @user.email do |format|
+      format.html
+    end
+  end
 end

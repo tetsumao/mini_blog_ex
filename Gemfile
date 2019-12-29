@@ -44,7 +44,7 @@ gem 'toastr-rails'
 
 # Heroku環境
 gem 'rails_12factor'
-gem 'cloudinary' , '1.11.1'
+gem 'cloudinary', '1.11.1'
 
 # 画像登録
 gem 'carrierwave', '~> 1.3.1'
