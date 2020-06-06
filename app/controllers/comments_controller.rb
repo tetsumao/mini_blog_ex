@@ -1,18 +1,12 @@
 class CommentsController < ApplicationController
-  # ログイン認証
   before_action :authenticate_user!
 
   # コメント
   def create
-    # コメント生成
-    @comment = Comment.new(comment_params)
-    # ユーザIDはログインユーザ
-    @comment.user_id = current_user.id
-
+    @comment = current_user.comments.new(comment_params)
     # Ajax呼び出しのみ有効
     respond_to do |format|
       if @comment.save
-        # 後でメール送信
         NotificationMailer.send_comment(@comment).deliver_later
         format.js { render :create_success }
       else
@@ -23,7 +17,6 @@ class CommentsController < ApplicationController
 
   # コメント表示切替
   def switch
-    # 投稿を取得
     @post = Post.find(params[:post_id])
     # コメント表示かどうかをbool変換
     @open = ActiveModel::Type::Boolean.new.cast(params[:open])
@@ -35,7 +28,7 @@ class CommentsController < ApplicationController
   end
 
   private
-  def comment_params
-    params.require(:comment).permit(:content, :post_id)
-  end
+    def comment_params
+      params.require(:comment).permit(:content, :post_id)
+    end
 end

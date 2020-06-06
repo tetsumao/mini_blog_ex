@@ -1,10 +1,10 @@
 -# いいねボタン
 - if current_user.liking_post?(post)
-  = form_with model: current_user.likes.find_by(post_id: post.id), method: :delete, remote: true do |f|
+  = form_with model: [post, current_user.likes.find_by(post_id: post.id)], method: :delete, remote: true do |f|
     = f.hidden_field :post_id, value: post.id, id: ''
     = f.submit 'いいね中', class: 'btn btn-primary btn-sm'
 - else
-  = form_with model: current_user.likes.build, remote: true do |f|
+  = form_with model: [post, current_user.likes.build], remote: true do |f|
     = f.hidden_field :post_id, value: post.id, id: ''
     = f.submit 'いいね', class: 'btn btn-outline-primary btn-sm'
 -# いいね件数

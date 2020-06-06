@@ -1,5 +1,4 @@
 class LikesController < ApplicationController
-  # ログイン認証
   before_action :authenticate_user!
 
   # いいね生成
@@ -31,7 +30,7 @@ class LikesController < ApplicationController
   end
 
   private
-  def like_params
-    params.require(:like).permit(:post_id)
-  end
+    def like_params
+      params.require(:like).permit(:post_id)
+    end
 end

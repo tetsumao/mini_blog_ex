@@ -1,9 +1,9 @@
 - unless current_user == user
   - if current_user.following?(user)
-    = form_with model: current_user.user_relations.find_by(follow_id: user.id), method: :delete, remote: true do |f|
+    = form_with model: [current_user, current_user.user_relations.find_by(follow_id: user.id)], method: :delete, remote: true do |f|
       = f.hidden_field :follow_id, value: user.id, id: ''
       = f.submit 'フォロー中', class: 'btn btn-primary btn-sm'
   - else
-    = form_with model: current_user.user_relations.build, remote: true do |f|
+    = form_with model: [current_user, current_user.user_relations.build], remote: true do |f|
       = f.hidden_field :follow_id, value: user.id, id: ''
       = f.submit 'フォロー', class: 'btn btn-outline-primary btn-sm'
