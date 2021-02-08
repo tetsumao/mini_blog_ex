@@ -47,7 +47,7 @@ gem 'rails_12factor'
 gem 'cloudinary', '1.11.1'
 
 # 画像登録
-gem 'carrierwave', '~> 1.3.1'
+gem 'carrierwave', '~> 1.3.2'
 gem 'mini_magick'
 
 group :development, :test do
